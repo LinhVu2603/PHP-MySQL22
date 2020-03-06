@@ -1,5 +1,5 @@
 <?php 	
-	include"header1.php"
+	include"header.php"
  ?>
  
 <?php 
@@ -15,5 +15,5 @@
  ?>
 
  <?php 
- 	include"footer1.php"
+ 	include"footer.php"
   ?>
