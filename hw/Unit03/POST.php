@@ -1,6 +1,7 @@
 <?php 
-echo "<legend>ZENT GROUP - PHP - Thực hành về gửi dữ liệu dùng POST</legend>";
-echo "THÔNG TIN SINH VIÊN"."<br>";
+echo "<legend>ZENT GROUP - PHP</legend>";
+echo "THÔNG TIN SINH VIÊN"."<br><br>";
+
 echo "Mã sinh viên:".$_POST['user']."<br>";
 echo "Họ và tên: ".$_POST['StName']."<br>";
 echo "Số điện thoại: ".$_POST['phone']."<br>";

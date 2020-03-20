@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="jquery-3.4.1.min.js"></script>
+    <style>
+    	legend{
+    		font-weight: bold;
+    	}
+    	label{
+    		font-weight: bold;
+    		font-size: 14px;
+    	}
+    	.form-group div{
+    		width: 10%;
+    		display: block;
+    		float: left;
+    		margin-top: 2%;
+    	}
+    	table td{
+    		width: 100px;
+    		height: 10px;
+    		padding-top: 10%;
+    	}
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <form action="POST.php" method="POST" role="form">
+            <legend>ZENT GROUP - PHP - Thực hành về gửi dữ liệu dùng POST</legend>
+            
+            <div class="form-group">
+                <label for="">Mã sinh viên</label>
+                <input type="text" class="form-control" id="" placeholder="Nhập mã sinh viên" name="user">
+            </div>
+            
+            <div class="form-group">
+                <label for="">Họ và tên</label>
+                <input type="text" class="form-control" id="" placeholder="Nhập họ và tên" name="StName">
+            </div>  
+            
+            <div class="form-group">
+                <label for="">Số điện thoại</label>
+                <input type="text" class="form-control" id="" placeholder="Nhập số điện thoại" name="phone">
+            </div>
+
+            <div class="form-group">
+                <label for="">Email</label>
+                <input type="text" class="form-control" id="" placeholder="Nhập email" name="mail">
+            </div>
+
+            <div class="form-group">
+                <label for="" style="float: left;">Giới tính</label>
+                <table>
+                	<tr>
+	                	<td><input style="float: left;width: 20%;font-size: 16px;" type="radio" class="form-control" name="gender">Nam</td>
+	                	<td><input style="float: left;width: 20%;font-size: 16px;" type="radio" class="form-control" name="gender">Nữ</td>
+	                	<td><input style="float: left;width: 20%;font-size: 16px;" type="radio" class="form-control" name="gender">Khác</td>
+	                </tr>	
+                </table>
+            </div>
+
+            <div class="form-group">
+                <label for="">Địa chỉ</label>
+                <input type="text" class="form-control" id="" placeholder="Nhập vào địa chỉ" name="address">
+            </div>
+            <button type="submit" class="btn btn-primary">Lưu thông tin</button>
+        </form>
+    </div>
+	<!-- <script type="text/javascript">
+		$(document).ready(function() {
+		 
+	        //Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
+	        $("#formDemo").validate(){
+	            rules: {
+	                user: "required",
+	                StName: "required",
+	                phone: {
+	                	required: true,
+	                	length: 10
+	                },
+	                mail: "required",
+	                gender: "required",
+	                address: {
+	                    required: true
+	                }
+	            },
+	            messages: {
+	                user: "Vui lòng nhập mã sinh viên!",
+	                StName: "Vui lòng nhập tên!",
+	                phone: {
+	                	required: "Vui lòng nhấp số điện thoại!",
+	                	length: "Số điện thoại phải có 10 số!"
+	                },
+	                mail: "Vui lòng nhập email!",
+	                gender: "Vui lòng chọn!",
+	                address: {
+	                    required: "Vui lòng nhập địa chỉ!"
+	                }
+	            }
+	        };
+	    });
+	</script> -->
+</body>
+</html>
