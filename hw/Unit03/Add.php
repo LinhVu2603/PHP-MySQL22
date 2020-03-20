@@ -1,11 +1,42 @@
-<!DOCTYPE html>
+<?php
+require ("add_process.php");
+
+$data = array();
+
+$is_update_action = false;
+
+if (!empty($_GET['id']))
+{
+	$data = getStudent($_GET['id']);
+	$is_update_action  = true;
+}
+
+
+if (!empty($_POST['add_student']))
+{
+
+	$data['student_id'] = isset($_POST['id']) ? $_POST['id'] : '';
+	$data['student_name'] = isset($_POST['StName']) ? $_POST['StName'] : '';
+	$data['student_phone'] = isset($_POST['phone']) ? $_POST['phone'] : '';
+	$data['student_email'] = isset($_POST['mail']) ? $_POST['mail'] : '';
+	$data['student_gender'] = isset($_POST['gender']) ? $_POST['gender'] : '';
+	$data['student_address'] = isset($_POST['address']) ? $_POST['address'] : '';
+
+	updateStudent($data['student_id'], $data['student_name'],$data['student_phone'], $data['student_email'], $data['student_gender'], $data['student_address']);
+	header("Location:list.php");
+}
+?>
 <html>
 <head>
     <meta charset="utf-8">
     <title>Form</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<script src="jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
     <style>
+    	.error {
+			color: red;
+		}
     	legend{
     		font-weight: bold;
     	}
@@ -29,80 +60,47 @@
 </head>
 <body>
     <div class="container">
-        <form action="POST.php" method="POST" role="form">
-            <legend>ZENT GROUP - PHP - Thực hành về gửi dữ liệu dùng POST</legend>
+        <form action="add_process.php" method="POST" role="form" id="formSV">
+            <legend>ZENT GROUP - PHP</legend>
             
             <div class="form-group">
                 <label for="">Mã sinh viên</label>
-                <input type="text" class="form-control" id="" placeholder="Nhập mã sinh viên" name="user">
+                <input type="text" class="form-control" id="" placeholder="Nhập mã sinh viên" name="id" required value="<?php echo !empty($data['student_id']) ? $data['student_id'] : ''; ?>">
             </div>
             
             <div class="form-group">
                 <label for="">Họ và tên</label>
-                <input type="text" class="form-control" id="" placeholder="Nhập họ và tên" name="StName">
+                <input type="text" class="form-control" id="" placeholder="Nhập họ và tên" name="StName" required value="<?php echo !empty($data['student_name']) ? $data['student_name'] : ''; ?>">
             </div>  
             
             <div class="form-group">
                 <label for="">Số điện thoại</label>
-                <input type="text" class="form-control" id="" placeholder="Nhập số điện thoại" name="phone">
+                <input type="text" class="form-control" id="" placeholder="Nhập số điện thoại" name="phone" required value="<?php echo !empty($data['student_phone']) ? $data['student_phone'] : ''; ?>">
             </div>
 
             <div class="form-group">
                 <label for="">Email</label>
-                <input type="text" class="form-control" id="" placeholder="Nhập email" name="mail">
+                <input type="text" class="form-control" id="" placeholder="Nhập email" name="mail" required value="<?php echo !empty($data['student_email']) ? $data['student_email'] : ''; ?>">
             </div>
 
             <div class="form-group">
                 <label for="" style="float: left;">Giới tính</label>
                 <table>
                 	<tr>
-	                	<td><input style="float: left;width: 20%;font-size: 16px;" type="radio" class="form-control" name="gender">Nam</td>
-	                	<td><input style="float: left;width: 20%;font-size: 16px;" type="radio" class="form-control" name="gender">Nữ</td>
-	                	<td><input style="float: left;width: 20%;font-size: 16px;" type="radio" class="form-control" name="gender">Khác</td>
+	                	<td><input style="float: left;width: 20%;font-size: 16px;" type="radio" class="form-control" name="gender" value="Male" required <?php if($is_update_action){echo !empty($data['student_gender'] == 'Male') ? 'checked=\'checked\'' : '';} ?>>Nam</td>
+	                	<td><input style="float: left;width: 20%;font-size: 16px;" type="radio" class="form-control" name="gender" value="Female" required <?php if($is_update_action){echo !empty($data['student_gender'] == 'Female') ? 'checked=\'checked\'' : '';} ?>>Nữ</td>
+	                	<td><input style="float: left;width: 20%;font-size: 16px;" type="radio" class="form-control" name="gender" value="Other" required <?php if($is_update_action){echo !empty($data['student_gender'] == 'Other') ? 'checked=\'checked\'' : '';} ?>>Khác</td>
+	                	<label for="gender" class="error" style="font-weight: bold;"></label>
 	                </tr>	
                 </table>
             </div>
 
             <div class="form-group">
                 <label for="">Địa chỉ</label>
-                <input type="text" class="form-control" id="" placeholder="Nhập vào địa chỉ" name="address">
+                <input type="text" class="form-control" id="" placeholder="Nhập vào địa chỉ" name="address" required value="<?php echo !empty($data['student_address']) ? $data['student_address'] : ''; ?>">
             </div>
-            <button type="submit" class="btn btn-primary">Lưu thông tin</button>
+            <button type="submit" class="btn btn-primary" name="add_student"  value="<?php echo ($is_update_action) ? "Cập nhật" : "Thêm mới"; ?>">Lưu thông tin</button>
         </form>
     </div>
-	<!-- <script type="text/javascript">
-		$(document).ready(function() {
-		 
-	        //Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
-	        $("#formDemo").validate(){
-	            rules: {
-	                user: "required",
-	                StName: "required",
-	                phone: {
-	                	required: true,
-	                	length: 10
-	                },
-	                mail: "required",
-	                gender: "required",
-	                address: {
-	                    required: true
-	                }
-	            },
-	            messages: {
-	                user: "Vui lòng nhập mã sinh viên!",
-	                StName: "Vui lòng nhập tên!",
-	                phone: {
-	                	required: "Vui lòng nhấp số điện thoại!",
-	                	length: "Số điện thoại phải có 10 số!"
-	                },
-	                mail: "Vui lòng nhập email!",
-	                gender: "Vui lòng chọn!",
-	                address: {
-	                    required: "Vui lòng nhập địa chỉ!"
-	                }
-	            }
-	        };
-	    });
-	</script> -->
 </body>
 </html>
