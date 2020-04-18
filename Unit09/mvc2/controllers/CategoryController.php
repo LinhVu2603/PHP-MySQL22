@@ -51,7 +51,11 @@ class CategoryController{
 		$this->model->update($data,$id);
 		header("Location: /Unit09/mvc2/index.php?mod=category&act=list");
 	}
-	public function delete(){}
+	public function delete(){
+		$id = $_GET['id'];
+		$this->cateogory_model->delete($id);
+		header("location: index.php?mod=post&act=list");
+	}
 
 }
 ?>

@@ -68,25 +68,28 @@ switch ($mod) {
 		$UserCtr_obj  = new UserController(); 
 		switch ($act) {
 			case 'list':
-				$UserCtr_obj->list();
-				break;
-			case 'add':
-				$UserCtr_obj->addPost();
+				$UserCtr_obj->listUser();
 				break;
 			case 'detail':
-				$UserCtr_obj->detail();
+				$UserCtr_obj->detailUser();
+				break;
+			case 'add':
+				$UserCtr_obj->addUser();
+				break;
+			case 'add-process':
+				$UserCtr_obj->addUserProcess();
 				break;
 			case 'edit':
-				$UserCtr_obj->edit();
+				$UserCtr_obj->editUser();
 				break;
 			case 'update':
-				$UserCtr_obj->update();
+				$UserCtr_obj->updateUser();
 				break;
 			case 'delete':
-				$UserCtr_obj->delete();
+				$UserCtr_obj->deleteUser();
 				break;
 			default:
-				die("Action User not found.");
+				echo "Khong ton tai act ".$act;
 				break;
 		}
 		break;
